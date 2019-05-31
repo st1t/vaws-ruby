@@ -1,0 +1,32 @@
+require 'aws-sdk-ec2'
+require 'vaws/aws/describer'
+
+module Vaws
+  module Aws
+    class Ec2Describer < Describer
+      attr_reader :term_table
+
+      def initialize
+        @ec2_client = ::Aws::EC2::Client.new
+        @term_table = ''
+      end
+
+      def set_basic_info
+        rows             = []
+        ec2_reservations = @ec2_client.describe_instances.reservations
+        ec2_reservations.each do |ec2_rsvn|
+          ec2_rsvn.instances.each do |ec2_instance|
+            tag           = ec2_instance.tags[0].value
+            instance_id   = ec2_instance.instance_id
+            instance_type = ec2_instance.instance_type
+            public_ip     = ec2_instance.public_ip_address
+            private_ip    = ec2_instance.private_ip_address
+            state_name    = ec2_instance.state.name
+            rows << [tag, instance_id, instance_type, public_ip, private_ip, state_name]
+          end
+        end
+        @term_table = Terminal::Table.new :headings => ['Name', 'Id', 'Type', 'GlobalIp', 'PrivateIp', 'Status'], :rows => rows
+      end
+    end
+  end
+end
