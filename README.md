@@ -16,6 +16,7 @@ Commands:
   vaws alb             # View Application Loadbalarancers
   vaws ec2             # View EC2 instances
   vaws help [COMMAND]  # Describe available commands or one specific command
+  vaws subnet          # View Subnet
 ```
 
 ### View EC2 Instances
@@ -41,6 +42,18 @@ $ vaws alb
 | hogehoge-nlb-internal           | network     | internal        | vpc-xxxxxxxx          | hogehoge-nlb-internal/xxxxxxxxxxxxxxx            | hogehoge-nlb-internal-xxxxxxxxxxxxxxxx.elb.ap-northeast-1.amazonaws.com           |
 | fugafuga-alb-internal           | application | internet-facing | vpc-xxxxxxxx          | fugafuga-alb-internal/xxxxxxxxxxxxxxx            | fugafuga-alb-internal-xxxxxxxxxxxxxxxx.ap-northeast-1.elb.amazonaws.com           |
 +---------------------------------+-------------+-----------------+-----------------------+--------------------------------------------------+-----------------------------------------------------------------------------------+
+$ 
+```
+
+### View Subnet
+
+```bash
+$ vaws subnet
++------------------+--------------------------+-----------------+-----------------------+
+| Cidr             | SubnetId                 | Az              | VpcId                 |
++------------------+--------------------------+-----------------+-----------------------+
+| 172.16.10.0/24   | subnet-xxxxxxxx          | ap-northeast-1a | vpc-xxxxxxxx          |
++------------------+--------------------------+-----------------+-----------------------+
 $ 
 ```
 

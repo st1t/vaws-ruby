@@ -2,6 +2,7 @@ require 'thor'
 require 'terminal-table'
 require 'vaws/aws/ec2_describer'
 require 'vaws/aws/alb_describer'
+require 'vaws/aws/subnet_describer'
 
 module Vaws
   module Handlers
@@ -21,6 +22,15 @@ module Vaws
         alb_desc.set_basic_info
         puts alb_desc.term_table
       end
+
+      desc 'subnet', 'View Subnet'
+
+      def subnet
+        subnet_desc = Vaws::Aws::SubnetDescriber.new
+        subnet_desc.set_basic_info
+        puts subnet_desc.term_table
+      end
+
     end
   end
 end
