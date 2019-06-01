@@ -12,9 +12,10 @@ $ gem install vaws
 
 ```bash
 $ vaws help
- Commands:
-   vaws ec2             # View ec2 instances
-   vaws help [COMMAND]  # Describe available commands or one specific command
+Commands:
+  vaws alb             # View Application Loadbalarancers
+  vaws ec2             # View EC2 instances
+  vaws help [COMMAND]  # Describe available commands or one specific command
 ```
 
 ### View EC2 Instances
@@ -28,6 +29,19 @@ $ vaws ec2
 | app     | i-0f59bfba6xxxxxxxx | t3.medium |          | 172.16.10.232 | stopped |
 +---------+---------------------+-----------+----------+---------------+---------+
 $
+```
+
+### View ALB
+
+```bash
+$ vaws alb
++---------------------------------+-------------+-----------------+-----------------------+--------------------------------------------------+-----------------------------------------------------------------------------------+
+| Name                            | Type        | Scheme          | Vpc                   | Short_Arn                                        | Dns                                                                               |
++---------------------------------+-------------+-----------------+-----------------------+--------------------------------------------------+-----------------------------------------------------------------------------------+
+| hogehoge-nlb-internal           | network     | internal        | vpc-xxxxxxxx          | hogehoge-nlb-internal/xxxxxxxxxxxxxxx            | hogehoge-nlb-internal-xxxxxxxxxxxxxxxx.elb.ap-northeast-1.amazonaws.com           |
+| fugafuga-alb-internal           | application | internet-facing | vpc-xxxxxxxx          | fugafuga-alb-internal/xxxxxxxxxxxxxxx            | fugafuga-alb-internal-xxxxxxxxxxxxxxxx.ap-northeast-1.elb.amazonaws.com           |
++---------------------------------+-------------+-----------------+-----------------------+--------------------------------------------------+-----------------------------------------------------------------------------------+
+$ 
 ```
 
 ## License

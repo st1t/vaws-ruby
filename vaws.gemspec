@@ -13,7 +13,7 @@ Gem::Specification.new do |spec|
   spec.homepage    = "https://github.com/st1t/vaws"
   spec.license     = "MIT"
 
-  spec.files         = Dir.chdir(File.expand_path('..', __FILE__)) do
+  spec.files = Dir.chdir(File.expand_path('..', __FILE__)) do
     `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
   end
   spec.files += Dir.glob("bin/**/*")
@@ -30,5 +30,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rspec", "~> 3.0"
   spec.add_runtime_dependency "thor", "~> 0.20.3"
   spec.add_runtime_dependency "aws-sdk-ec2"
+  spec.add_runtime_dependency "aws-sdk-elasticloadbalancingv2"
   spec.add_runtime_dependency "terminal-table", "~> 1.8.0"
 end
