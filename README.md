@@ -57,6 +57,17 @@ $ vaws subnet
 $ 
 ```
 
+### View VPC
+
+```bash
+$ vaws vpc
++-----------------------+------------------+-------------------------+
+| VpcId                 | Cidr             | Tags                    |
++-----------------------+------------------+-------------------------+
+| vpc-xxxxxxxx          | 172.16.0.0/16    | default-vpc             |
++-----------------------+------------------+-------------------------+
+```
+
 ## License
 
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).

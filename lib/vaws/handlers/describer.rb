@@ -3,6 +3,7 @@ require 'terminal-table'
 require 'vaws/aws/ec2_describer'
 require 'vaws/aws/alb_describer'
 require 'vaws/aws/subnet_describer'
+require 'vaws/aws/vpc_describer'
 
 module Vaws
   module Handlers
@@ -29,6 +30,14 @@ module Vaws
         subnet_desc = Vaws::Aws::SubnetDescriber.new
         subnet_desc.set_basic_info
         puts subnet_desc.term_table
+      end
+
+      desc 'vpc', 'View Vpc'
+
+      def vpc
+        vpc_desc = Vaws::Aws::VpcDescriber.new
+        vpc_desc.set_basic_info
+        puts vpc_desc.term_table
       end
 
     end
