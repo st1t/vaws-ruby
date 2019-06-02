@@ -4,6 +4,7 @@ require 'vaws/aws/ec2_describer'
 require 'vaws/aws/alb_describer'
 require 'vaws/aws/subnet_describer'
 require 'vaws/aws/vpc_describer'
+require 'vaws/aws/ecs_describer'
 
 module Vaws
   module Handlers
@@ -38,6 +39,14 @@ module Vaws
         vpc_desc = Vaws::Aws::VpcDescriber.new
         vpc_desc.set_basic_info
         puts vpc_desc.term_table
+      end
+
+      desc 'ecs', 'View ECS'
+
+      def ecs
+        ecs_desc = Vaws::Aws::EcsDescriber.new
+        ecs_desc.set_basic_info
+        puts ecs_desc.term_table
       end
 
     end
