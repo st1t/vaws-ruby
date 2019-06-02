@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    vaws (0.1.0)
+    vaws (0.2.0)
       aws-sdk-ec2
       aws-sdk-ecs
       aws-sdk-elasticloadbalancingv2
