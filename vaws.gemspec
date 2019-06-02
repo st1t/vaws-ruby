@@ -32,5 +32,6 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency "aws-sdk-ec2"
   spec.add_runtime_dependency "aws-sdk-elasticloadbalancingv2"
   spec.add_runtime_dependency "aws-sdk-ecs"
+  spec.add_runtime_dependency "aws-sdk-route53"
   spec.add_runtime_dependency "terminal-table", "~> 1.8.0"
 end

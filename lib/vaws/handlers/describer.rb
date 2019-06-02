@@ -5,6 +5,7 @@ require 'vaws/aws/alb_describer'
 require 'vaws/aws/subnet_describer'
 require 'vaws/aws/vpc_describer'
 require 'vaws/aws/ecs_describer'
+require 'vaws/aws/route53_describer'
 
 module Vaws
   module Handlers
@@ -49,6 +50,13 @@ module Vaws
         puts ecs_desc.term_table
       end
 
+      desc 'route53', 'View Route53'
+
+      def route53
+        r53_desc = Vaws::Aws::Route53Describer.new
+        r53_desc.set_basic_info
+        puts r53_desc.term_table
+      end
     end
   end
 end
