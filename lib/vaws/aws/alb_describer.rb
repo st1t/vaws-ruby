@@ -26,7 +26,7 @@ module Vaws
 
           rows << [name, type, scheme, vpc, arn, dns]
         end
-        @term_table = Terminal::Table.new :headings => ['Name', 'Type', 'Scheme', 'Vpc', 'Short_Arn', 'Dns'], :rows => rows
+        @term_table = Terminal::Table.new :headings => ['Name', 'Type', 'Scheme', 'Vpc', 'Short_Arn', 'Dns'], :rows => rows.sort
       end
     end
   end

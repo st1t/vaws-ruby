@@ -22,7 +22,7 @@ module Vaws
 
           rows << [cidr, subnet_id, az, vpc_id]
         end
-        @term_table = Terminal::Table.new :headings => ['Cidr', 'SubnetId', 'Az', 'VpcId'], :rows => rows
+        @term_table = Terminal::Table.new :headings => ['Cidr', 'SubnetId', 'Az', 'VpcId'], :rows => rows.sort
       end
     end
   end

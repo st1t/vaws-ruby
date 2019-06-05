@@ -27,7 +27,7 @@ module Vaws
 
           rows << [vpc_id, cidr, tags]
         end
-        @term_table = Terminal::Table.new :headings => ['VpcId', 'Cidr', 'Tags'], :rows => rows
+        @term_table = Terminal::Table.new :headings => ['VpcId', 'Cidr', 'Tags'], :rows => rows.sort
       end
     end
   end

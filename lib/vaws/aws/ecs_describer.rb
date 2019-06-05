@@ -31,7 +31,7 @@ module Vaws
           rows << [cluster_name, cluster_services, active_services_count, running_tasks_count, pending_tasks_count]
         end
 
-        @term_table = Terminal::Table.new :headings => ['ClusterName', 'Services', 'ActService', 'RunTask', 'PenTask'], :rows => rows
+        @term_table = Terminal::Table.new :headings => ['ClusterName', 'Services', 'ActService', 'RunTask', 'PenTask'], :rows => rows.sort
       end
 
       private

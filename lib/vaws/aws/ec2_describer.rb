@@ -28,7 +28,7 @@ module Vaws
             rows << [@tag, instance_id, instance_type, public_ip, private_ip, state_name]
           end
         end
-        @term_table = Terminal::Table.new :headings => ['Name', 'Id', 'Type', 'GlobalIp', 'PrivateIp', 'Status'], :rows => rows
+        @term_table = Terminal::Table.new :headings => ['Name', 'Id', 'Type', 'GlobalIp', 'PrivateIp', 'Status'], :rows => rows.sort
       end
     end
   end

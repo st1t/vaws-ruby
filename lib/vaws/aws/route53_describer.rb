@@ -33,7 +33,7 @@ module Vaws
             record_alias = ''
           end
         end
-        @term_table = Terminal::Table.new :headings => ['Fqdn', 'Type', 'Value', 'Ttl', 'Alias'], :rows => rows
+        @term_table = Terminal::Table.new :headings => ['Fqdn', 'Type', 'Value', 'Ttl', 'Alias'], :rows => rows.sort
       end
 
       private
