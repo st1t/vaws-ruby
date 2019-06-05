@@ -6,6 +6,7 @@ require 'vaws/aws/subnet_describer'
 require 'vaws/aws/vpc_describer'
 require 'vaws/aws/ecs_describer'
 require 'vaws/aws/route53_describer'
+require 'vaws/aws/security_group_describer'
 
 module Vaws
   module Handlers
@@ -56,6 +57,18 @@ module Vaws
         r53_desc = Vaws::Aws::Route53Describer.new
         r53_desc.set_basic_info
         puts r53_desc.term_table
+      end
+
+      desc 'sg', 'View Security Group'
+      option :in, :aliases => 'i', :type => :boolean, banner: "Inbound security group"
+      option :out, :aliases => 'o', :type => :boolean, banner: "Outbound security group"
+
+      def sg
+        is_in   = options[:in] if options[:in]
+        is_out  = options[:out] if options[:out]
+        sg_desc = Vaws::Aws::SecurityGroupDescriber.new(is_in, is_out)
+        sg_desc.set_basic_info
+        puts sg_desc.term_table
       end
     end
   end
