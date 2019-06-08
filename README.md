@@ -18,6 +18,7 @@ Commands:
   vaws ecs             # View ECS
   vaws help [COMMAND]  # Describe available commands or one specific command
   vaws route53         # View Route53
+  vaws sg              # View Security Group
   vaws subnet          # View Subnet
   vaws vpc             # View Vpc
 ```
