@@ -8,6 +8,7 @@ require 'vaws/aws/ecs_describer'
 require 'vaws/aws/route53_describer'
 require 'vaws/aws/security_group_describer'
 require 'vaws/aws/acm_describer'
+require 'vaws/aws/ssm_describer'
 
 module Vaws
   module Handlers
@@ -78,6 +79,14 @@ module Vaws
         acm_desc = Vaws::Aws::AcmDescriber.new
         acm_desc.set_basic_info
         puts acm_desc.term_table
+      end
+
+      desc 'ssm', 'View SSM Parameter store'
+
+      def ssm
+        ssm_desc = Vaws::Aws::SsmDescriber.new
+        ssm_desc.set_basic_info
+        puts ssm_desc.term_table
       end
     end
   end
