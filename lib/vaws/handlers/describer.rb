@@ -7,6 +7,7 @@ require 'vaws/aws/vpc_describer'
 require 'vaws/aws/ecs_describer'
 require 'vaws/aws/route53_describer'
 require 'vaws/aws/security_group_describer'
+require 'vaws/aws/acm_describer'
 
 module Vaws
   module Handlers
@@ -69,6 +70,14 @@ module Vaws
         sg_desc = Vaws::Aws::SecurityGroupDescriber.new(is_in, is_out)
         sg_desc.set_basic_info
         puts sg_desc.term_table
+      end
+
+      desc 'acm', 'View ACM'
+
+      def acm
+        acm_desc = Vaws::Aws::AcmDescriber.new
+        acm_desc.set_basic_info
+        puts acm_desc.term_table
       end
     end
   end
