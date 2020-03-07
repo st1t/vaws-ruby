@@ -62,6 +62,7 @@ module Vaws
       end
 
       desc 'sg', 'View Security Group'
+
       def sg
         sg_desc = Vaws::Aws::SecurityGroupDescriber.new
         sg_desc.set_basic_info
@@ -82,6 +83,12 @@ module Vaws
         ssm_desc = Vaws::Aws::SsmDescriber.new
         ssm_desc.set_basic_info
         puts ssm_desc.term_table
+      end
+
+      desc 'version', 'View vaws version'
+
+      def version
+        puts VERSION
       end
     end
   end
