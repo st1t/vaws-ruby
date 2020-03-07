@@ -41,12 +41,12 @@ module Vaws
       end
 
       def get_service_arns(cluster_arn)
-        return @ecs_client.list_services({ cluster: "#{cluster_arn}" })[:service_arns]
+        @ecs_client.list_services({ cluster: "#{cluster_arn}" })[:service_arns]
       end
 
       def get_service_names(cluster_arn)
-        service_ary = @ecs_client.list_services({ cluster: "#{cluster_arn}", max_results: 100 })[:service_arns]
-        return service_ary.join(",").gsub(/arn:aws:ecs:#{ENV['AWS_DEFAULT_REGION']}:[0-9]*:service\//, "")
+        service_ary = @ecs_client.list_services({ cluster: "#{cluster_arn}", max_results: 100 })[:service_arns].sort
+        service_ary.join("\n").gsub(/arn:aws:ecs:#{ENV['AWS_DEFAULT_REGION']}:[0-9]*:service\//, "")
       end
     end
   end
