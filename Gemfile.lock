@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    vaws (0.6.0)
+    vaws (0.7.0)
       aws-sdk-acm
       aws-sdk-ec2
       aws-sdk-ecs
@@ -72,4 +72,4 @@ DEPENDENCIES
   vaws!
 
 BUNDLED WITH
-   2.1.2
+   2.1.4
