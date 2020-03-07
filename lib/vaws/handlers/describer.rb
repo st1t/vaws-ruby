@@ -62,13 +62,8 @@ module Vaws
       end
 
       desc 'sg', 'View Security Group'
-      option :in, :aliases => 'i', :type => :boolean, banner: "Inbound security group"
-      option :out, :aliases => 'o', :type => :boolean, banner: "Outbound security group"
-
       def sg
-        is_in   = options[:in] if options[:in]
-        is_out  = options[:out] if options[:out]
-        sg_desc = Vaws::Aws::SecurityGroupDescriber.new(is_in, is_out)
+        sg_desc = Vaws::Aws::SecurityGroupDescriber.new
         sg_desc.set_basic_info
         puts sg_desc.term_table
       end
