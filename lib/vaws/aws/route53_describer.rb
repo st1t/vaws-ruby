@@ -14,33 +14,70 @@ module Vaws
 
       def set_basic_info
         rows = []
-        get_hosted_zone
 
-        @r53_hosted_zone_ids.each do |zone_id|
-          record_values = ''
-          records       = @r53_client.list_resource_record_sets({ hosted_zone_id: "#{zone_id}", max_items: 1000 })
-          records.resource_record_sets.each do |record_sets|
-            record_name = record_sets.name
-            record_type = record_sets.type
-            record_ttl  = record_sets.ttl
-            if record_sets.alias_target.nil?
-              record_sets.resource_records.each do |record|
+        zone_id                = selected_zone_id
+        record_values          = ''
+        next_record_identifier = nil
+        next_record_name       = nil
+        next_record_type       = nil
+
+        begin
+          param_args                           = {
+            hosted_zone_id: zone_id,
+            max_items:      200
+          }
+          param_args[:start_record_identifier] = next_record_identifier if next_record_identifier
+          param_args[:start_record_name]       = next_record_name if next_record_name
+          param_args[:start_record_type]       = next_record_type if next_record_type
+          resp                                 = @r53_client.list_resource_record_sets(param_args)
+
+          resp.resource_record_sets.each do |record_set|
+            name = record_set.name
+            type = record_set.type
+            ttl  = record_set.ttl
+            if record_set.alias_target.nil?
+              record_set.resource_records.each do |record|
                 record_values << "#{record.value.to_s}\n"
               end
             else
-              record_values = record_sets.alias_target.dns_name
+              record_values = record_set.alias_target.dns_name
             end
-            rows << [record_name, record_type, record_values, record_ttl]
+            rows << [name, type, record_values, ttl]
             record_values = ''
           end
-        end
+          next_record_identifier = resp.next_record_identifier
+          next_record_name       = resp.next_record_name
+          next_record_type       = resp.next_record_type
+        end while next_record_identifier
         @term_table = Terminal::Table.new :headings => ['Fqdn', 'Type', 'Value', 'Ttl'], :rows => rows.sort
       end
 
+
       private
 
-      def get_hosted_zone
-        @r53_client.list_hosted_zones({ max_items: 100 }).hosted_zones.each do |zone|
+      def selected_zone_id
+        puts "# ZONE LIST"
+        zones = hosted_zones
+        zones.each_with_index do |zone, cnt|
+          puts "#{cnt}:#{zone[:name]}"
+        end
+        print "zone number: "
+        input = STDIN.gets
+        begin
+          raise unless /[0-9].*/ =~ input
+          input_zone_number = input.to_i
+          zones[input_zone_number][:id] if zones[input_zone_number][:id]
+        rescue
+          puts "Not found zone"
+          return
+        end
+      end
+
+      def hosted_zones
+        param_args = {
+          max_items: 100
+        }
+        @r53_client.list_hosted_zones(param_args).hosted_zones.each do |zone|
           @r53_hosted_zone_ids << zone.id
         end
       end

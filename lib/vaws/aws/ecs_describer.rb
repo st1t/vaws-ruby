@@ -14,14 +14,13 @@ module Vaws
       end
 
       def set_basic_info
-        get_cluster_arns
-
         rows = []
-        @cluster_arns.each do |cluster_arn|
+
+        cluster_arns.each do |cluster_arn|
           cluster_name = cluster_arn.gsub(/arn:aws:ecs:#{ENV['AWS_DEFAULT_REGION']}:[0-9]*:cluster\//, "")
           @cluster_info.store("#{cluster_name}", {})
           cluster_name     = "#{cluster_name}"
-          cluster_services = get_service_names(cluster_arn)
+          cluster_services = service_names(cluster_arn)
 
           ecs_cluster           = @ecs_client.describe_clusters({ clusters: ["#{cluster_arn}"] }).clusters
           running_tasks_count   = ecs_cluster[0].running_tasks_count
@@ -36,15 +35,22 @@ module Vaws
 
       private
 
-      def get_cluster_arns
-        @cluster_arns = @ecs_client.list_clusters[:cluster_arns]
+      def cluster_arns
+        param_args = {
+          max_results: 100
+        }
+        @ecs_client.list_clusters(param_args)[:cluster_arns]
       end
 
-      def get_service_arns(cluster_arn)
-        @ecs_client.list_services({ cluster: "#{cluster_arn}" })[:service_arns]
+      def service_arns(cluster_arn)
+        param_args = {
+          cluster:     cluster_arn,
+          max_results: 1
+        }
+        @ecs_client.list_services(param_args)[:service_arns]
       end
 
-      def get_service_names(cluster_arn)
+      def service_names(cluster_arn)
         service_ary = @ecs_client.list_services({ cluster: "#{cluster_arn}", max_results: 100 })[:service_arns].sort
         service_ary.join("\n").gsub(/arn:aws:ecs:#{ENV['AWS_DEFAULT_REGION']}:[0-9]*:service\//, "")
       end

@@ -12,17 +12,24 @@ module Vaws
       end
 
       def set_basic_info
-        rows   = []
-        params = @ssm_client.describe_parameters({ max_results: 50 })
+        rows       = []
+        next_token = nil
 
-        params.parameters.each do |param|
-          name             = param.name
-          type             = param.type
-          version          = param.version
-          last_modify_date = param.last_modified_date
-
-          rows << [name, type, version, last_modify_date]
-        end
+        begin
+          param_args              = {
+            max_results: 100
+          }
+          param_args[:next_token] = next_token if next_token
+          resp                    = @ssm_client.describe_parameters(param_args)
+          resp.parameters.each do |param|
+            name             = param.name
+            type             = param.type
+            version          = param.version
+            last_modify_date = param.last_modified_date
+            rows << [name, type, version, last_modify_date]
+          end
+          next_token = resp.next_token
+        end while next_token
         @term_table = Terminal::Table.new :headings => ['Path', 'Type', 'Version', 'LastModifyDate'], :rows => rows.sort
       end
     end
