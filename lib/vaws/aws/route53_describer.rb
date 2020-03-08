@@ -69,7 +69,7 @@ module Vaws
           zones[input_zone_number][:id] if zones[input_zone_number][:id]
         rescue
           puts "Not found zone"
-          return
+          exit
         end
       end
 
