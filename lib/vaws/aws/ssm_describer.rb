@@ -17,7 +17,7 @@ module Vaws
 
         begin
           param_args              = {
-            max_results: 100
+            max_results: 50
           }
           param_args[:next_token] = next_token if next_token
           resp                    = @ssm_client.describe_parameters(param_args)
