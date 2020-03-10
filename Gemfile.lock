@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    vaws (0.8.0)
+    vaws (0.8.1)
       aws-sdk-acm
       aws-sdk-ec2
       aws-sdk-ecs
@@ -16,27 +16,27 @@ GEM
   specs:
     aws-eventstream (1.0.3)
     aws-partitions (1.281.0)
-    aws-sdk-acm (1.27.0)
+    aws-sdk-acm (1.28.0)
       aws-sdk-core (~> 3, >= 3.71.0)
       aws-sigv4 (~> 1.1)
-    aws-sdk-core (3.90.1)
+    aws-sdk-core (3.91.0)
       aws-eventstream (~> 1.0, >= 1.0.2)
       aws-partitions (~> 1, >= 1.239.0)
       aws-sigv4 (~> 1.1)
       jmespath (~> 1.0)
-    aws-sdk-ec2 (1.148.0)
+    aws-sdk-ec2 (1.149.0)
       aws-sdk-core (~> 3, >= 3.71.0)
       aws-sigv4 (~> 1.1)
-    aws-sdk-ecs (1.57.0)
+    aws-sdk-ecs (1.58.0)
       aws-sdk-core (~> 3, >= 3.71.0)
       aws-sigv4 (~> 1.1)
-    aws-sdk-elasticloadbalancingv2 (1.40.1)
+    aws-sdk-elasticloadbalancingv2 (1.41.0)
       aws-sdk-core (~> 3, >= 3.71.0)
       aws-sigv4 (~> 1.1)
-    aws-sdk-route53 (1.30.0)
+    aws-sdk-route53 (1.31.0)
       aws-sdk-core (~> 3, >= 3.71.0)
       aws-sigv4 (~> 1.1)
-    aws-sdk-ssm (1.71.0)
+    aws-sdk-ssm (1.72.0)
       aws-sdk-core (~> 3, >= 3.71.0)
       aws-sigv4 (~> 1.1)
     aws-sigv4 (1.1.1)
