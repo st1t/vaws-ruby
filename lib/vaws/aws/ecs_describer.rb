@@ -27,10 +27,10 @@ module Vaws
           pending_tasks_count   = ecs_cluster[0].pending_tasks_count
           active_services_count = ecs_cluster[0].active_services_count
 
-          rows << [cluster_name, cluster_services, active_services_count, running_tasks_count, pending_tasks_count]
+          rows << [cluster_name, active_services_count, running_tasks_count, pending_tasks_count, cluster_services]
         end
 
-        @term_table = Terminal::Table.new :headings => ['ClusterName', 'Services', 'ActService', 'RunTask', 'PenTask'], :rows => rows.sort
+        @term_table = Terminal::Table.new :headings => ['ClusterName', 'ActService', 'RunTask', 'PenTask', 'Services'], :rows => rows.sort
       end
 
       private
@@ -51,7 +51,8 @@ module Vaws
       end
 
       def service_names(cluster_arn)
-        service_ary = @ecs_client.list_services({ cluster: "#{cluster_arn}", max_results: 100 })[:service_arns].sort
+        service_ary = ['']
+        service_ary << @ecs_client.list_services({ cluster: "#{cluster_arn}", max_results: 100 })[:service_arns].sort
         service_ary.join("\n").gsub(/arn:aws:ecs:#{ENV['AWS_DEFAULT_REGION']}:[0-9]*:service\//, "")
       end
     end
