@@ -46,11 +46,13 @@ module Vaws
       end
 
       desc 'ecs', 'View ECS'
+      option :tasks, aliases: 't', :type => :boolean
+      option :networks, aliases: 'n', :type => :boolean
+      option :services, aliases: 's', :type => :boolean
 
       def ecs
-        ecs_desc = Vaws::Aws::EcsDescriber.new
-        ecs_desc.set_basic_info
-        puts ecs_desc.term_table
+        describer = Vaws::Aws::EcsDescriber.new
+        puts describer.terminal_table(opt_tasks: options["tasks"], opt_networks: options["networks"], opt_services: options["services"])
       end
 
       desc 'route53', 'View Route53'
