@@ -47,7 +47,10 @@ module Vaws
         service_names.each_slice(1).to_a.each do |s|
           describe_services(cluster: cluster_name, service_names: s).services.each do |ds|
             ds.load_balancers.each do |lb|
-              lb_target_group = lb.target_group_arn.gsub(/.*:targetgroup\//, '')
+              lb_container_name = lb.container_name
+              lb_container_port = lb.container_port
+              lb_target_group   = lb.target_group_arn.gsub(/.*:targetgroup\//, '').gsub(/\/.*$/, '')
+              lb_target_group << ":#{lb_container_name}:#{lb_container_port}"
             end
 
             ds.deployments.each do |d|
@@ -61,17 +64,16 @@ module Vaws
                 d.capacity_provider_strategy.each do |c|
                   c_provider = c.capacity_provider
                 end
-              else
-                c_provider = "EC2"
               end
             end
+            c_provider = ds.launch_type if c_provider.nil?
 
             rows << [task, d_count, r_count, p_count, lb_target_group, sg, updated_at, c_provider]
             task, d_count, r_count, p_count, lb_target_group, sg, updated_at, c_provider = nil
           end
         end
 
-        Terminal::Table.new :headings => ['TaskDefinition', 'Desired', 'Running', 'Pending', 'LbTargetGroup', 'SecurityGroup', 'UpdatedAt', 'CapacityProvider'], :rows => rows.sort
+        Terminal::Table.new :headings => ['TaskDefinition', 'Desired', 'Running', 'Pending', 'LbTargetGroup:Container:Port', 'SecurityGroup', 'UpdatedAt', 'CapacityProvider'], :rows => rows.sort
       end
 
       def networks
