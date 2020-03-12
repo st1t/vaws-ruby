@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    vaws (0.8.2)
+    vaws (0.8.3)
       aws-sdk-acm
       aws-sdk-ec2
       aws-sdk-ecs
