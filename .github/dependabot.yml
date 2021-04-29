@@ -1,0 +1,55 @@
+version: 2
+updates:
+- package-ecosystem: bundler
+  directory: "/"
+  schedule:
+    interval: daily
+    time: "20:00"
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: aws-sdk-ec2
+    versions:
+    - 1.221.0
+    - 1.223.0
+    - 1.224.0
+    - 1.225.0
+    - 1.226.0
+    - 1.227.0
+    - 1.228.0
+    - 1.229.0
+    - 1.230.0
+    - 1.231.0
+    - 1.232.0
+    - 1.233.0
+    - 1.234.0
+  - dependency-name: aws-sdk-ssm
+    versions:
+    - 1.103.0
+    - 1.104.0
+    - 1.105.0
+    - 1.106.0
+    - 1.107.0
+  - dependency-name: aws-sdk-route53
+    versions:
+    - 1.45.0
+    - 1.46.0
+    - 1.47.0
+    - 1.48.0
+  - dependency-name: aws-sdk-ecs
+    versions:
+    - 1.73.0
+    - 1.74.0
+    - 1.75.0
+    - 1.76.0
+  - dependency-name: aws-sdk-acm
+    versions:
+    - 1.38.0
+    - 1.39.0
+    - 1.40.0
+  - dependency-name: aws-sdk-elasticloadbalancingv2
+    versions:
+    - 1.56.0
+    - 1.57.0
+    - 1.58.0
+    - 1.59.0
+    - 1.60.0
