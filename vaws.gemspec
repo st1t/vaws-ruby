@@ -35,5 +35,5 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency "aws-sdk-route53"
   spec.add_runtime_dependency "aws-sdk-acm"
   spec.add_runtime_dependency "aws-sdk-ssm"
-  spec.add_runtime_dependency "terminal-table", "~> 1.8.0"
+  spec.add_runtime_dependency "terminal-table", ">= 1.8", "< 3.1"
 end
