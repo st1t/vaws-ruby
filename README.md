@@ -5,6 +5,8 @@ The vaws command was created to simplify the display of AWS resources.
 # !!!!WARNING!!!!
 
 I am working on a project to rewrite Ruby to Go.  
+https://github.com/st1t/vaws  
+
 Therefore, this repository is now archived.  
 Changed the repository name from vaws to vaws-ruby.
 
